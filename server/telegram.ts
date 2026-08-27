@@ -11,26 +11,27 @@ function requireEnvironmentVariable(name: string) {
   return value
 }
 
+function escapeTelegramHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+}
+
 export async function sendConsultationToTelegram(consultation: ConsultationDelivery) {
   const botToken = requireEnvironmentVariable('TELEGRAM_BOT_TOKEN')
   const chatId = requireEnvironmentVariable('TELEGRAM_CHAT_ID')
-  const receivedAt = new Intl.DateTimeFormat('ko-KR', {
-    dateStyle: 'long',
-    timeStyle: 'short',
-    timeZone: 'Asia/Seoul',
-  }).format(consultation.receivedAt)
   const text = [
-    '📬 새 상담 신청',
+    '🔔 <b>새 상담 신청</b>',
     '',
-    `접수번호: ${consultation.reference}`,
-    `접수시간: ${receivedAt}`,
-    `이름: ${consultation.name}`,
-    `연락처: ${consultation.phone}`,
-    `상담 가능시간: ${consultation.availableTime}`,
-    `접수지역: ${consultation.country || '확인 불가'}`,
+    '━━━━━━━━━━━━━━',
+    `👤 <b>이름</b>  ${escapeTelegramHtml(consultation.name)}`,
+    `📞 <b>연락처</b>  <code>${escapeTelegramHtml(consultation.phone)}</code>`,
+    `🕒 <b>상담 가능시간</b>  ${escapeTelegramHtml(consultation.availableTime)}`,
+    '━━━━━━━━━━━━━━',
     '',
-    '[문의 내용]',
-    consultation.message,
+    '📝 <b>문의 내용</b>',
+    `<blockquote>${escapeTelegramHtml(consultation.message)}</blockquote>`,
   ].join('\n')
 
   const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -39,6 +40,7 @@ export async function sendConsultationToTelegram(consultation: ConsultationDeliv
     body: JSON.stringify({
       chat_id: chatId,
       text,
+      parse_mode: 'HTML',
       protect_content: true,
       link_preview_options: { is_disabled: true },
     }),
