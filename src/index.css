@@ -1,0 +1,71 @@
+:root {
+  color-scheme: only light;
+  --navy: #4b1118;
+  --blue: #7a1f29;
+  --red: #a63b45;
+  --heading: #6b2932;
+  --text: #2e2325;
+  --text-muted: #75686b;
+  --page-bg: #fdf9f9;
+  --surface-soft: #f8eff0;
+  --border-soft: #eadbdd;
+  font-family: Pretendard, 'Pretendard Variable', 'Noto Sans KR', 'Apple SD Gothic Neo', Inter, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--page-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: only light;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--page-bg);
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--text);
+  background: var(--page-bg);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: #fff;
+  background: var(--blue);
+}
