@@ -95,42 +95,42 @@ const steps = [
 const legalExperts = [
   {
     name: '서지원 변호사',
-    image: '/images/naran-seo-jiwon.jpg',
+    image: '/images/naran-seo-jiwon-transparent.png',
     career: '대한변협 인증 형사법·부동산 전문변호사',
   },
   {
     name: '최지연 변호사',
-    image: '/images/naran-choi-jiyeon.jpg',
+    image: '/images/naran-choi-jiyeon-transparent.png',
     career: '서울도봉·강북경찰서 경미범죄 심사위원',
   },
   {
     name: '정이든 변호사',
-    image: '/images/naran-jung-ideun.jpg',
+    image: '/images/naran-jung-ideun-transparent.png',
     career: '대한변협 인증 부동산 전문변호사',
   },
   {
     name: '문인정 변호사',
-    image: '/images/naran-moon-injeong.png',
+    image: '/images/naran-moon-injeong-transparent.png',
     career: '대한변협 인증 형사법 전문변호사',
   },
   {
     name: '강수은 변호사',
-    image: '/images/naran-kang-sueun.jpg',
+    image: '/images/naran-kang-sueun-transparent.png',
     career: '상간 손해배상 사건 승소 수행 · 영어·일본어',
   },
   {
     name: '이정민 변호사',
-    image: '/images/naran-lee-jungmin.jpg',
+    image: '/images/naran-lee-jungmin-transparent.png',
     career: '경기도교육청 교직원법률지원 변호사',
   },
   {
     name: '손수정 변호사',
-    image: '/images/naran-son-sujeong.png',
+    image: '/images/naran-son-sujeong-transparent.png',
     career: '대법원 국선변호인 · 경기도 법률상담위원',
   },
   {
     name: '황용상 고문',
-    image: '/images/naran-hwang-yongsang.jpg',
+    image: '/images/naran-hwang-yongsang.png',
     career: '경찰 재직 35년 · 수사업무 30년',
   },
 ]
@@ -695,7 +695,10 @@ function App() {
             <p className="section-kicker">PRIVATE CONSULTATION</p>
             <h2 id="consultation-title">확실한 결과 정성이 책임집니다</h2>
           </div>
-          <div className="chat-bubbles" aria-hidden="true" data-reveal="scale"><p>탐정법인 정성입니다.<br />무엇을 도와드릴까요?</p><p>심증은 있는데… 물증이 없어요.<br />가능할까요?</p></div>
+          <div className="chat-bubbles" aria-hidden="true">
+            <p data-reveal="left">탐정법인 정성입니다.<br />무엇을 도와드릴까요?</p>
+            <p data-reveal="right" style={{ '--reveal-delay': '140ms' } as CSSProperties}>심증은 있는데… 물증이 없어요.<br />가능할까요?</p>
+          </div>
           <form className="consultation-form" onSubmit={submitConsultation} data-reveal="up">
             <div className="honeypot" aria-hidden="true"><label htmlFor="website">웹사이트</label><input id="website" name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setForm({ ...form, website: event.target.value })} /></div>
             <label><span>이름</span><input required maxLength={30} autoComplete="name" placeholder="성함을 입력해주세요." value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} /></label>

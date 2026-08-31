@@ -1449,6 +1449,18 @@ main {
     transform: translate3d(0, 32px, 0);
   }
 
+  .motion-ready .chat-bubbles [data-reveal='left'] {
+    transform: translate3d(-36px, 0, 0);
+  }
+
+  .motion-ready .chat-bubbles [data-reveal='right'] {
+    transform: translate3d(36px, 0, 0);
+  }
+
+  .motion-ready .chat-bubbles [data-reveal].is-visible {
+    transform: translate3d(0, 0, 0);
+  }
+
   .page-shell {
     width: min(100% - 28px, 520px);
   }
