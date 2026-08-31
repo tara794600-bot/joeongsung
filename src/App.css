@@ -1139,6 +1139,7 @@ main {
   color: #191919;
   background: #fee500;
   box-shadow: 0 16px 34px rgb(83 71 0 / 18%), 0 4px 12px rgb(40 34 0 / 12%);
+  animation: consultation-float 2.8s ease-in-out -1.4s infinite;
 }
 
 .floating-consultation:hover {
