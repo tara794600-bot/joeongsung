@@ -1130,8 +1130,8 @@ main {
 
 .floating-consultation {
   color: #fff;
-  background: #a6535f;
-  box-shadow: 0 16px 34px rgb(122 31 41 / 28%), 0 4px 12px rgb(60 13 19 / 16%);
+  background: #22a447;
+  box-shadow: 0 16px 34px rgb(20 123 55 / 28%), 0 4px 12px rgb(8 83 34 / 18%);
   animation: consultation-float 2.8s ease-in-out infinite;
 }
 
@@ -1144,7 +1144,7 @@ main {
 
 .floating-consultation:hover {
   filter: brightness(1.08);
-  box-shadow: 0 20px 40px rgb(122 31 41 / 36%), 0 5px 14px rgb(60 13 19 / 18%);
+  box-shadow: 0 20px 40px rgb(20 123 55 / 36%), 0 5px 14px rgb(8 83 34 / 20%);
 }
 
 .floating-kakao:hover {

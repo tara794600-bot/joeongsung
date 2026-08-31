@@ -153,6 +153,8 @@ const initialForm: ConsultationForm = {
   website: '',
 }
 
+const consultationPhoneNumber = '010-0000-0000'
+
 function Brand() {
   return (
     <a className="brand" href="#top" aria-label="탐정법인 정성 홈">
@@ -163,11 +165,10 @@ function Brand() {
   )
 }
 
-function ConsultationIcon() {
+function PhoneIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20 11.2a7.8 7.8 0 0 1-8 7.6 8.6 8.6 0 0 1-3.1-.6L4 20l1.5-4.3A7.3 7.3 0 0 1 4 11.2a7.8 7.8 0 0 1 8-7.6 7.8 7.8 0 0 1 8 7.6Z" />
-      <path d="M8.5 11.2h.01M12 11.2h.01M15.5 11.2h.01" />
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.56 2.8.69A2 2 0 0 1 22 16.92Z" />
     </svg>
   )
 }
@@ -726,9 +727,13 @@ function App() {
         >
           <KakaoIcon />
         </a>
-        <button className="floating-consultation" type="button" onClick={goToConsultation} aria-label="원클릭 상담 신청 영역으로 이동">
-          <span className="floating-consultation-icon"><ConsultationIcon /></span>
-        </button>
+        <a
+          className="floating-consultation"
+          href={`tel:${consultationPhoneNumber.replace(/-/g, '')}`}
+          aria-label={`전화 상담 ${consultationPhoneNumber}`}
+        >
+          <span className="floating-consultation-icon"><PhoneIcon /></span>
+        </a>
       </div>
     </main>
   )
