@@ -260,8 +260,59 @@ function App() {
   const expertTrackRef = useRef<HTMLDivElement>(null)
   const expertResetTimerRef = useRef<number | null>(null)
   const processTrackRef = useRef<HTMLDivElement>(null)
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
 
   useScrollReveal()
+
+  useEffect(() => {
+    const video = heroVideoRef.current
+    if (!video) return
+
+    let retryArmed = false
+    let isDisposed = false
+
+    const disarmInteractionRetry = () => {
+      if (!retryArmed) return
+      retryArmed = false
+      window.removeEventListener('pointerdown', retryOnFirstInteraction)
+      window.removeEventListener('touchstart', retryOnFirstInteraction)
+    }
+
+    const retryOnFirstInteraction = () => {
+      disarmInteractionRetry()
+      video.muted = true
+      void video.play().catch(() => undefined)
+    }
+
+    const armInteractionRetry = () => {
+      if (retryArmed || isDisposed) return
+      retryArmed = true
+      window.addEventListener('pointerdown', retryOnFirstInteraction, { passive: true })
+      window.addEventListener('touchstart', retryOnFirstInteraction, { passive: true })
+    }
+
+    const attemptPlayback = () => {
+      video.muted = true
+      void video.play()
+        .then(disarmInteractionRetry)
+        .catch(() => {
+          if (video.paused) armInteractionRetry()
+        })
+    }
+
+    const handleCanPlay = () => {
+      if (video.paused) attemptPlayback()
+    }
+
+    video.addEventListener('canplay', handleCanPlay)
+    attemptPlayback()
+
+    return () => {
+      isDisposed = true
+      video.removeEventListener('canplay', handleCanPlay)
+      disarmInteractionRetry()
+    }
+  }, [])
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -406,6 +457,7 @@ function App() {
       <section className="hero-section page-shell" aria-labelledby="hero-title" data-reveal="scale">
         <div className="hero-card">
           <video
+            ref={heroVideoRef}
             className="hero-background"
             autoPlay
             muted
@@ -415,10 +467,6 @@ function App() {
             disablePictureInPicture
             preload="auto"
             aria-hidden="true"
-            onCanPlay={(event) => {
-              event.currentTarget.muted = true
-              void event.currentTarget.play().catch(() => undefined)
-            }}
           >
             <source src="/images/building.mp4" type="video/mp4" />
           </video>
