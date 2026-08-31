@@ -81,7 +81,7 @@ main {
 
 .button:focus-visible,
 .floating-consultation:focus-visible,
-.mobile-sticky-cta:focus-visible {
+.floating-kakao:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
@@ -240,7 +240,7 @@ main {
 
 .hero-content h1 {
   margin: 18px 0 22px;
-  color: rgb(122 31 41 / 88%);
+  color: #fff;
   font-size: clamp(3rem, 5.5vw, 5rem);
   line-height: 1.18;
   letter-spacing: -0.075em;
@@ -276,6 +276,7 @@ main {
 
 .hero-description {
   margin: clamp(48px, 5vw, 72px) 0 0;
+  color: #fff;
   font-size: clamp(1.05rem, 2vw, 1.42rem);
   font-weight: 500;
 }
@@ -468,15 +469,7 @@ main {
   color: #fff;
   background-position: center;
   background-size: cover;
-  isolation: isolate;
-}
-
-.proof-cards article::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: rgb(75 17 24 / 50%);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 48%);
 }
 
 .proof-cards span,
@@ -491,10 +484,22 @@ main {
 
 .case-board {
   --case-row-height: 46px;
+  --case-border-angle: 0deg;
   margin-top: 42px;
-  border: 5px solid #a44550;
+  border: 5px solid transparent;
   border-radius: 22px;
   padding: 30px 38px 24px;
+  background:
+    linear-gradient(#f8f5f5, #f8f5f5) padding-box,
+    conic-gradient(
+      from var(--case-border-angle),
+      #a44550 0deg 300deg,
+      #b9616b 318deg,
+      #efd7da 332deg,
+      #b9616b 346deg,
+      #a44550 360deg
+    ) border-box;
+  animation: case-border-orbit 8s linear infinite;
 }
 
 .case-board-title {
@@ -1096,15 +1101,19 @@ main {
   grid-column: 2;
 }
 
-.mobile-sticky-cta {
-  display: none;
-}
-
-.floating-consultation {
+.floating-actions {
   position: fixed;
   z-index: 20;
   right: max(24px, calc((100vw - 1440px) / 2));
   bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.floating-consultation,
+.floating-kakao {
   width: 64px;
   height: 64px;
   display: grid;
@@ -1112,19 +1121,34 @@ main {
   border: 0;
   border-radius: 50%;
   padding: 0;
-  color: #fff;
-  background: #a6535f;
-  box-shadow: 0 16px 34px rgb(122 31 41 / 28%), 0 4px 12px rgb(60 13 19 / 16%);
   font: inherit;
   font-weight: 900;
   cursor: pointer;
-  animation: consultation-float 2.8s ease-in-out infinite;
+  text-decoration: none;
   transition: box-shadow 180ms ease, filter 180ms ease;
+}
+
+.floating-consultation {
+  color: #fff;
+  background: #a6535f;
+  box-shadow: 0 16px 34px rgb(122 31 41 / 28%), 0 4px 12px rgb(60 13 19 / 16%);
+  animation: consultation-float 2.8s ease-in-out infinite;
+}
+
+.floating-kakao {
+  color: #191919;
+  background: #fee500;
+  box-shadow: 0 16px 34px rgb(83 71 0 / 18%), 0 4px 12px rgb(40 34 0 / 12%);
 }
 
 .floating-consultation:hover {
   filter: brightness(1.08);
   box-shadow: 0 20px 40px rgb(122 31 41 / 36%), 0 5px 14px rgb(60 13 19 / 18%);
+}
+
+.floating-kakao:hover {
+  filter: brightness(1.04);
+  box-shadow: 0 20px 40px rgb(83 71 0 / 24%), 0 5px 14px rgb(40 34 0 / 14%);
 }
 
 .floating-consultation-icon {
@@ -1136,8 +1160,7 @@ main {
   color: #fff;
 }
 
-.floating-consultation svg,
-.mobile-sticky-cta svg {
+.floating-consultation svg {
   width: 30px;
   height: 30px;
   fill: none;
@@ -1145,6 +1168,12 @@ main {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.8;
+}
+
+.floating-kakao svg {
+  width: 30px;
+  height: 30px;
+  display: block;
 }
 
 @keyframes hero-breathe {
@@ -1163,6 +1192,16 @@ main {
 
 @keyframes case-list-roll {
   to { transform: translateY(-50%); }
+}
+
+@property --case-border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes case-border-orbit {
+  to { --case-border-angle: 360deg; }
 }
 
 @keyframes consultation-float {
@@ -1852,10 +1891,6 @@ main {
     padding-bottom: 0;
   }
 
-  .site-footer {
-    padding-bottom: 110px;
-  }
-
   .site-footer .page-shell {
     display: flex;
     flex-direction: column;
@@ -1868,33 +1903,16 @@ main {
     overflow-wrap: anywhere;
   }
 
-  .mobile-sticky-cta {
-    position: fixed;
-    z-index: 10;
-    left: 14px;
+  .floating-actions {
     right: 14px;
-    bottom: 12px;
-    min-height: 54px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    border: 0;
-    border-radius: 16px;
-    color: #fff;
-    background: #a6535f;
-    box-shadow: 0 12px 30px rgb(122 31 41 / 26%);
-    font: inherit;
-    font-weight: 900;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    gap: 10px;
   }
 
-  .mobile-sticky-cta svg {
-    width: 23px;
-    height: 23px;
-  }
-
-  .floating-consultation {
-    display: none;
+  .floating-consultation,
+  .floating-kakao {
+    width: 56px;
+    height: 56px;
   }
 }
 

@@ -172,6 +172,26 @@ function ConsultationIcon() {
   )
 }
 
+function KakaoIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g clipPath="url(#kakao-floating-clip)">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M12.0001 2.19995C6.20072 2.19995 1.5 5.83174 1.5 10.3109C1.5 13.0966 3.31815 15.5524 6.0868 17.0131L4.92188 21.2685C4.81896 21.6445 5.249 21.9443 5.57922 21.7264L10.6856 18.3562C11.1165 18.3978 11.5545 18.422 12.0001 18.422C17.7989 18.422 22.5 14.7904 22.5 10.3109C22.5 5.83174 17.7989 2.19995 12.0001 2.19995Z"
+          fill="black"
+        />
+      </g>
+      <defs>
+        <clipPath id="kakao-floating-clip">
+          <rect width="21" height="21" fill="white" transform="translate(1.5 1.5)" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
 function getCaseDate(referenceDate: Date, daysAgo: number) {
   const date = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), referenceDate.getDate() - daysAgo, 12)
   const year = date.getFullYear()
@@ -483,7 +503,7 @@ function App() {
             </h1>
             <p className="hero-description">오직 배우자의 외도와 불륜 사건만을 집요하게 파고드는 외도 전문 탐정법인</p>
             <div className="hero-actions">
-              <a className="button button-secondary" href="tel:010-0000-0000">전화 상담</a>
+              <button className="button button-secondary" type="button" onClick={goToConsultation}>원클릭 상담</button>
             </div>
           </div>
           <div className="hero-metrics" aria-label="주요 실적">
@@ -501,10 +521,10 @@ function App() {
             <p>신뢰할 수 있는 경력의 전문가들이 팀을 꾸려<br />효과적으로 증거를 수집하며 해결하고 있습니다.</p>
           </div>
           <div className="proof-cards" data-reveal="up">
-            <article style={{ backgroundImage: "url('/images/proof-handshake-neutral.webp')" }}>
+            <article style={{ backgroundImage: "url('/images/proof-handshake.webp')" }}>
               <span>만족도</span><strong><AnimatedNumber value={98} />%</strong>
             </article>
-            <article style={{ backgroundImage: "url('/images/proof-office-neutral.webp')" }}>
+            <article style={{ backgroundImage: "url('/images/proof-office.webp')" }}>
               <span>진행건수</span><strong><AnimatedNumber value={15087} />+</strong>
             </article>
           </div>
@@ -693,13 +713,20 @@ function App() {
         <div className="page-shell"><Brand /><p>상담 내용과 개인정보는 안전하게 보호됩니다.</p><small>© 2026 탐정법인 정성. All rights reserved.</small></div>
       </footer>
 
-      <button className="floating-consultation" type="button" onClick={goToConsultation} aria-label="원클릭 상담 신청 영역으로 이동">
-        <span className="floating-consultation-icon"><ConsultationIcon /></span>
-      </button>
-      <button className="mobile-sticky-cta" type="button" onClick={goToConsultation}>
-        <ConsultationIcon />
-        <span>원클릭 상담</span>
-      </button>
+      <div className="floating-actions" aria-label="빠른 상담">
+        <a
+          className="floating-kakao"
+          href="https://www.kakao.com/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="카카오 공식 홈페이지 열기"
+        >
+          <KakaoIcon />
+        </a>
+        <button className="floating-consultation" type="button" onClick={goToConsultation} aria-label="원클릭 상담 신청 영역으로 이동">
+          <span className="floating-consultation-icon"><ConsultationIcon /></span>
+        </button>
+      </div>
     </main>
   )
 }
