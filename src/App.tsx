@@ -422,12 +422,6 @@ function App() {
           >
             <source src="/images/building.mp4" type="video/mp4" />
           </video>
-          <img
-            className="hero-mobile-background"
-            src="/images/building-mobile-ultra.webp"
-            alt=""
-            aria-hidden="true"
-          />
           <div className="hero-content">
             <p className="eyebrow">외도 증거수집 전문 탐정법인</p>
             <h1 id="hero-title">
