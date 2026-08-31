@@ -210,6 +210,7 @@ main {
   inset: 0;
   width: 100%;
   height: 100%;
+  opacity: 0.9;
   object-fit: cover;
   pointer-events: none;
 }
@@ -239,7 +240,7 @@ main {
 
 .hero-content h1 {
   margin: 18px 0 22px;
-  color: #913540;
+  color: rgb(122 31 41 / 88%);
   font-size: clamp(3rem, 5.5vw, 5rem);
   line-height: 1.18;
   letter-spacing: -0.075em;
