@@ -278,6 +278,7 @@ function App() {
   const [submitMessage, setSubmitMessage] = useState('')
   const [rollingKeywordIndex, setRollingKeywordIndex] = useState(0)
   const [caseDateReference, setCaseDateReference] = useState(() => new Date())
+  const [heroVideoReady, setHeroVideoReady] = useState(false)
   const expertTrackRef = useRef<HTMLDivElement>(null)
   const expertResetTimerRef = useRef<number | null>(null)
   const processTrackRef = useRef<HTMLDivElement>(null)
@@ -477,9 +478,13 @@ function App() {
 
       <section className="hero-section page-shell" aria-labelledby="hero-title" data-reveal="scale">
         <div className="hero-card">
+          <picture className={`hero-poster${heroVideoReady ? ' is-hidden' : ''}`} aria-hidden="true">
+            <source media="(max-width: 620px)" srcSet="/images/building-mobile-hq.webp" />
+            <img src="/images/building-mobile.webp" alt="" fetchPriority="high" />
+          </picture>
           <video
             ref={heroVideoRef}
-            className="hero-background"
+            className={`hero-background${heroVideoReady ? ' is-ready' : ''}`}
             autoPlay
             muted
             loop
@@ -488,6 +493,7 @@ function App() {
             disablePictureInPicture
             preload="auto"
             aria-hidden="true"
+            onPlaying={() => setHeroVideoReady(true)}
           >
             <source src="/images/building.mp4" type="video/mp4" />
           </video>
