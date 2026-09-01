@@ -479,8 +479,7 @@ function App() {
       <section className="hero-section page-shell" aria-labelledby="hero-title" data-reveal="scale">
         <div className="hero-card">
           <picture className={`hero-poster${heroVideoReady ? ' is-hidden' : ''}`} aria-hidden="true">
-            <source media="(max-width: 620px)" srcSet="/images/building-mobile-hq.webp" />
-            <img src="/images/building-mobile.webp" alt="" fetchPriority="high" />
+            <img src="/images/building-first-frame.webp" alt="" fetchPriority="high" />
           </picture>
           <video
             ref={heroVideoRef}
@@ -492,6 +491,7 @@ function App() {
             controls={false}
             disablePictureInPicture
             preload="auto"
+            poster="/images/building-first-frame.webp"
             aria-hidden="true"
             onPlaying={() => setHeroVideoReady(true)}
           >
